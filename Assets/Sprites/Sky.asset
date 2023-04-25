@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: Sky
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: -386157441, guid: 9f32ad0b4aafc0341821144b74fd03c4, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: 1707102536, guid: 9f32ad0b4aafc0341821144b74fd03c4, type: 3}
+    - {fileID: -741269981, guid: 9f32ad0b4aafc0341821144b74fd03c4, type: 3}
+    - {fileID: -386157441, guid: 9f32ad0b4aafc0341821144b74fd03c4, type: 3}
+    - {fileID: -386157441, guid: 9f32ad0b4aafc0341821144b74fd03c4, type: 3}
+    - {fileID: -386157441, guid: 9f32ad0b4aafc0341821144b74fd03c4, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.544
+    m_Output: 1
+    m_ColliderType: 1
+    m_RandomTransform: 1
+    m_Neighbors: 010000000100000001000000
+    m_NeighborPositions:
+    - {x: 0, y: -3, z: 0}
+    - {x: 0, y: -2, z: 0}
+    - {x: 0, y: -1, z: 0}
+    m_RuleTransform: 0
