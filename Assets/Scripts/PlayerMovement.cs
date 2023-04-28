@@ -7,20 +7,22 @@ public class PlayerMovement : MonoBehaviour
 {
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
-    // Animator myAnimator;
+    Animator myAnimator;
     Collider2D myCollider;
     Transform myTransform;
-    bool isAlive = true;
+    [SerializeField] BoxCollider2D endGoal;
+    bool inAir = false;
+    public bool isRunning = false;
     [SerializeField] float playerSpeed = 10;
     [SerializeField] float jumpSpeed = 1f;
-    [SerializeField] float climbSpeed = 2f;
-    [SerializeField] Vector2 deathKick = new Vector2 (-10f, 10f);
+    [SerializeField] float jumpDelay = 1f;
+    // [SerializeField] Vector2 deathKick = new Vector2 (-10f, 10f);
     
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
-        // myAnimator = GetComponent<Animator>();
+        myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<PolygonCollider2D>();
         myTransform = GetComponent<Transform>();
     }
@@ -28,14 +30,15 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-        if (!isAlive) {return;}
+        
         Run();
-        // FlipSprite();
+        
+        FlipSprite();
     
     }
     void OnMove(InputValue value)
     {
-        if (!isAlive) {return;}
+        
         moveInput = value.Get<Vector2>();
     }
     void Run()
@@ -45,11 +48,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveInput.x != 0)
         {
-            // myAnimator.SetBool("isRunning", true);
+            myAnimator.SetBool("isRunning", true);
         }
         else
         {
-            // myAnimator.SetBool("isRunning", false);
+            myAnimator.SetBool("isRunning", false);
         }
     }
     void FlipSprite() 
@@ -62,16 +65,29 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnJump(InputValue value)
     {
-        if (!isAlive) {return;}
+        if (inAir) {return;}
         if(value.isPressed)
         {
             if (myCollider.IsTouchingLayers())
             {
-            myRigidbody.velocity += new Vector2 (0f, jumpSpeed);                
+            myRigidbody.velocity += new Vector2 (0f, jumpSpeed);
+            myAnimator.SetBool("isJumping", true);
+            inAir = true; 
+            Invoke("EndJump", jumpDelay);               
             }
 
         }
     }
-    
-    
+    void EndJump()
+    {
+        inAir = false;
+        myAnimator.SetBool("isJumping", false);
+    }
+    void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (other.gameObject.GetComponent<BoxCollider2D>() == endGoal)
+        {
+            Debug.Log("Goal Reached");
+        }    
+    }
 }
