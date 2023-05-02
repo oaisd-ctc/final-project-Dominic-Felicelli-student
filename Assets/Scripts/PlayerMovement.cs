@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,12 +12,14 @@ public class PlayerMovement : MonoBehaviour
     Collider2D myCollider;
     Transform myTransform;
     [SerializeField] BoxCollider2D endGoal;
+    [SerializeField] CanvasGroup Results;
+    public bool inPlay = true;
     bool inAir = false;
-    public bool isRunning = false;
+    
     [SerializeField] float playerSpeed = 10;
     [SerializeField] float jumpSpeed = 1f;
     [SerializeField] float jumpDelay = 1f;
-    // [SerializeField] Vector2 deathKick = new Vector2 (-10f, 10f);
+   
     
 
     void Start()
@@ -30,11 +33,12 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        if (inPlay)
+        {
+            Run();
+            FlipSprite();
+        }
         
-        Run();
-        
-        FlipSprite();
-    
     }
     void OnMove(InputValue value)
     {
@@ -70,10 +74,10 @@ public class PlayerMovement : MonoBehaviour
         {
             if (myCollider.IsTouchingLayers())
             {
-            myRigidbody.velocity += new Vector2 (0f, jumpSpeed);
-            myAnimator.SetBool("isJumping", true);
-            inAir = true; 
-            Invoke("EndJump", jumpDelay);               
+                myRigidbody.velocity += new Vector2 (0f, jumpSpeed);
+                myAnimator.SetBool("isJumping", true);
+                inAir = true;
+                Invoke("EndJump", jumpDelay);               
             }
 
         }
@@ -88,6 +92,9 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.GetComponent<BoxCollider2D>() == endGoal)
         {
             Debug.Log("Goal Reached");
+            inPlay = false;
+            myAnimator.SetBool("isRunning", false);
+            Results.enabled.Equals(true);
         }    
     }
 }
