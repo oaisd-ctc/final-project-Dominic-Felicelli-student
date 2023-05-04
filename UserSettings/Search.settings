@@ -7,9 +7,6 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.DA949528" = "Tilemap Ed"
-	"OpenInspectorPreview.DA949528" = "0"
-	"currentGroup.DA949528" = "all"
 }
 providers = {
 	adb = {
@@ -61,6 +58,7 @@ searchItemFavorites = [
 ]
 savedSearchesSortOrder = 0
 showSavedSearchPanel = false
+hideTabs = false
 expandedQueries = [
 ]
 queryBuilder = false
