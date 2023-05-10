@@ -25,8 +25,8 @@ public class CoinCollection : MonoBehaviour
         if (coinsCollected > 99)
         {
             coinsCollected = 0;
-        }
-        else if (coinsCollected < 10)
+        }    
+        if (coinsCollected < 10)
         {
             coinCounter.text = "0" + coinsCollected;
         }

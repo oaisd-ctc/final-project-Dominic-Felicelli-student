@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     Collider2D myCollider;
     Transform myTransform;
     [SerializeField] BoxCollider2D endGoal;
-    [SerializeField] CanvasGroup Results;
+    // [SerializeField] CanvasGroup Results;
     public bool inPlay = true;
     bool inAir = false;
     
@@ -69,18 +70,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnJump(InputValue value)
     {
-        if (inAir) {return;}
-        if(value.isPressed)
-        {
-            if (myCollider.IsTouchingLayers())
-            {
-                myRigidbody.velocity += new Vector2 (0f, jumpSpeed);
-                myAnimator.SetBool("isJumping", true);
-                inAir = true;
-                Invoke("EndJump", jumpDelay);               
-            }
-
-        }
+        Jump(value, 1);
     }
     void EndJump()
     {
@@ -94,7 +84,27 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Goal Reached");
             inPlay = false;
             myAnimator.SetBool("isRunning", false);
-            Results.enabled.Equals(true);
+            SceneManager.LoadScene(1);
         }    
+    }
+    void OnSpecial(InputValue value)
+    {
+        Jump(value, 10);
+  
+    }
+    void Jump(InputValue value, int power)
+    {
+        if (inAir) {return;}
+        if(value.isPressed)
+        {
+            if (myCollider.IsTouchingLayers())
+            {
+                myRigidbody.velocity += new Vector2 (0f, jumpSpeed * power);
+                myAnimator.SetBool("isJumping", true);
+                inAir = true;
+                Invoke("EndJump", jumpDelay);               
+            }
+
+        }
     }
 }

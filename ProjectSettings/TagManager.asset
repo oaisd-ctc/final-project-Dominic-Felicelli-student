@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Sky
+    uniqueID: 768215675
+    locked: 0
+  - name: Player
+    uniqueID: 1413542365
+    locked: 0
+  - name: Water
+    uniqueID: 3959861461
+    locked: 0
+  - name: Ground
+    uniqueID: 2567524539
+    locked: 0
+  - name: Goal
+    uniqueID: 1284564219
+    locked: 0
