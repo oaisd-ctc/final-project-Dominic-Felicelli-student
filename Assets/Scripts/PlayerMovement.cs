@@ -15,11 +15,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] BoxCollider2D endGoal;
     // [SerializeField] CanvasGroup Results;
     public bool inPlay = true;
+    bool canTeleport = true;
     bool inAir = false;
     
     [SerializeField] float playerSpeed = 10;
     [SerializeField] float jumpSpeed = 1f;
     [SerializeField] float jumpDelay = 1f;
+    [SerializeField] float teleportDelay = 1.6f;
    
     
 
@@ -84,13 +86,12 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Goal Reached");
             inPlay = false;
             myAnimator.SetBool("isRunning", false);
-            SceneManager.LoadScene(1);
+            Invoke("ChangeScene", 5f);
         }    
     }
     void OnSpecial(InputValue value)
     {
-        Jump(value, 10);
-  
+        Teleport(0,3,0);
     }
     void Jump(InputValue value, int power)
     {
@@ -106,5 +107,25 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
+    }
+    void Teleport(float x, float y, float z)
+    {
+        if (!canTeleport) {return;}
+        else
+        {
+            Vector3 translation = new Vector3(x, y, z);
+            myTransform.Translate(translation, Space.Self);
+            canTeleport = false;
+            Invoke("RechargeTeleport", teleportDelay);
+        }
+        
+    }
+    void RechargeTeleport()
+    {
+        canTeleport = true;
+    }
+    void ChangeScene() 
+    {
+        SceneManager.LoadScene(1);
     }
 }

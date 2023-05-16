@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IdleToggles : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         
@@ -15,5 +15,9 @@ public class IdleToggles : MonoBehaviour
     void Update()
     {
         
+    }
+    void OnClick()
+    {
+        SceneManager.LoadScene(0);
     }
 }
