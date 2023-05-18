@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpSpeed = 1f;
     [SerializeField] float jumpDelay = 1f;
     [SerializeField] float teleportDelay = 1.6f;
+    [SerializeField] AudioClip SpawnSFX;
+    [SerializeField] AudioClip GoalSFX; 
    
     
 
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<PolygonCollider2D>();
         myTransform = GetComponent<Transform>();
+        // GetComponent<AudioSource>().Play();
     }
 
     
@@ -83,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.GetComponent<BoxCollider2D>() == endGoal)
         {
+            GetComponent<AudioSource>().Play();
             Debug.Log("Goal Reached");
             inPlay = false;
             myAnimator.SetBool("isRunning", false);
